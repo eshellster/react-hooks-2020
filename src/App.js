@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <div className="parent">
-      <div>{loading ? `loading...` : data}</div>
+      <div>{data ? data : `loading...`}</div>
       <button
         onClick={() => {
           setCount((c) => c + 1);
