@@ -1,30 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
 import { useForm } from "./useForm";
+import { useFetch } from "./useFetch";
 // import { Hello } from "./Hello";
 
 const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
-
-  // const [showHello, setHello] = useState(true);
-
-  // useEffect(() => {
-  //   const onMouseMove = (e) => {
-  //     console.log(e);
-  //   };
-  //   window.addEventListener("mousemove", onMouseMove);
-  //   return () => {
-  //     window.removeEventListener("mousemove", onMouseMove);
-  //   };
-  // }, []);
-
-  useEffect(() => {
-    console.log("mount1");
-  }, []);
-
-  useEffect(() => {
-    console.log("mount2");
-  }, []);
+  useFetch("http://numbersapi.com/43/trivia");
 
   return (
     <div className="parent">
