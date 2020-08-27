@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { useForm } from "./useForm";
 import { useFetch } from "./useFetch";
@@ -6,8 +6,12 @@ import { useFetch } from "./useFetch";
 
 const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(JSON.parse(localStorage.getItem("count")));
   const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
+
+  useEffect(() => {
+    localStorage.setItem("count", JSON.stringify(count));
+  }, [count]);
 
   return (
     <div className="parent">
