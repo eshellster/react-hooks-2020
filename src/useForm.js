@@ -8,7 +8,7 @@ export const useForm = (initialValue) => {
     (e) => {
       setValue({
         ...values,
-        [e.targat.name]: e.target.value,
+        [e.target.name]: e.target.value,
       });
     },
   ];
