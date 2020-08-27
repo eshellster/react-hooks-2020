@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { useForm } from "./useForm";
 import { useFetch } from "./useFetch";
@@ -6,11 +6,19 @@ import { useFetch } from "./useFetch";
 
 const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
-  const { data, loading } = useFetch("http://numbersapi.com/43/trivia");
+  const [count, setCount] = useState(0);
+  const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
 
   return (
     <div className="parent">
       <div>{loading ? `loading...` : data}</div>
+      <button
+        onClick={() => {
+          setCount((c) => c + 1);
+        }}
+      >
+        increment
+      </button>
       <div>
         {/* <button onClick={() => setHello(!showHello)}>toggle</button> */}
         {/* {showHello && <Hello />} */}
