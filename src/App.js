@@ -8,14 +8,22 @@ const App = () => {
 
   // const [showHello, setHello] = useState(true);
 
+  // useEffect(() => {
+  //   const onMouseMove = (e) => {
+  //     console.log(e);
+  //   };
+  //   window.addEventListener("mousemove", onMouseMove);
+  //   return () => {
+  //     window.removeEventListener("mousemove", onMouseMove);
+  //   };
+  // }, []);
+
   useEffect(() => {
-    const onMouseMove = (e) => {
-      console.log(e);
-    };
-    window.addEventListener("mousemove", onMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-    };
+    console.log("mount1");
+  }, []);
+
+  useEffect(() => {
+    console.log("mount2");
   }, []);
 
   return (
