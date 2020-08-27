@@ -6,10 +6,11 @@ import { useFetch } from "./useFetch";
 
 const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
-  useFetch("http://numbersapi.com/43/trivia");
+  const { data, loading } = useFetch("http://numbersapi.com/43/trivia");
 
   return (
     <div className="parent">
+      <div>{loading ? `loading...` : data}</div>
       <div>
         {/* <button onClick={() => setHello(!showHello)}>toggle</button> */}
         {/* {showHello && <Hello />} */}
