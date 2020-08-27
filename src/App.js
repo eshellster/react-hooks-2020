@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { useForm } from "./useForm";
-import { Hello } from "./Hello";
+// import { Hello } from "./Hello";
 
 const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
 
-  const [showHello, setHello] = useState(true);
+  // const [showHello, setHello] = useState(true);
+
+  useEffect(() => {
+    const onMouseMove = (e) => {
+      console.log(e);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
 
   return (
     <div className="parent">
       <div>
-        <button onClick={() => setHello(!showHello)}>toggle</button>
-        {showHello && <Hello />}
+        {/* <button onClick={() => setHello(!showHello)}>toggle</button> */}
+        {/* {showHello && <Hello />} */}
         <input
           type="name"
           name="name"
