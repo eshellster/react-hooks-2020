@@ -8,13 +8,13 @@ const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
 
   const inputRef = useRef();
-  const hello = useRef(() => console.log("hello"));
+  // const hello = useRef(() => console.log("hello"));
 
   const [showHello, setHello] = useState(true);
 
-  useLayoutEffect(() => {
-    console.log(inputRef.current.getBoundingClientRect());
-  }, []);
+  // useLayoutEffect(() => {
+  //   console.log(inputRef.current.getBoundingClientRect());
+  // }, []);
 
   return (
     <div className="parent">
@@ -49,7 +49,7 @@ const App = () => {
           <button
             onClick={() => {
               inputRef.current.focus();
-              hello.current();
+              // hello.current();
             }}
           >
             focus

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { useFetch } from "./useFetch";
 
 export const Hello = () => {
@@ -9,9 +9,14 @@ export const Hello = () => {
     localStorage.setItem("count", JSON.stringify(count));
   }, [count]);
   //   console.log("hello render:", renders.current++);
+
+  const divRef = useRef();
+  useLayoutEffect(() => {
+    console.log(divRef.current.getBoundingClientRect());
+  }, [data]);
   return (
     <div>
-      <div>{data ? data : `loading...`}</div>
+      <div ref={divRef}>{data ? data : `loading...`}</div>
       <div>count: {count}</div>
       <button
         onClick={() => {
