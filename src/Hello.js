@@ -10,13 +10,18 @@ export const Hello = () => {
   }, [count]);
   //   console.log("hello render:", renders.current++);
 
+  const [rect, setRect] = useState({});
   const divRef = useRef();
   useLayoutEffect(() => {
-    console.log(divRef.current.getBoundingClientRect());
+    setRect(divRef.current.getBoundingClientRect());
   }, [data]);
   return (
     <div>
-      <div ref={divRef}>{data ? data : `loading...`}</div>
+      <div style={{ display: "flex" }}>
+        <div ref={divRef}>{data ? data : `loading...`}</div>
+      </div>
+
+      <pre>{JSON.stringify(rect, null, 2)}</pre>
       <div>count: {count}</div>
       <button
         onClick={() => {
