@@ -11,7 +11,7 @@ export const Hello = () => {
   }, [count]);
   //   console.log("hello render:", renders.current++);
 
-  const [rect, divRef] = useMeasure(data);
+  const [rect, divRef] = useMeasure([data]);
 
   return (
     <div>

@@ -3,6 +3,7 @@ import "./App.css";
 import { useForm } from "./useForm";
 // import { useFetch } from "./useFetch";
 import { Hello } from "./Hello";
+import { useMeasure } from "./useMeasure";
 
 const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
@@ -15,6 +16,8 @@ const App = () => {
   // useLayoutEffect(() => {
   //   console.log(inputRef.current.getBoundingClientRect());
   // }, []);
+
+  const [rect, inputRef2] = useMeasure([]);
 
   return (
     <div className="parent">
@@ -33,6 +36,7 @@ const App = () => {
             onChange={handleChange}
           />
           <input
+            ref={inputRef2}
             type="name"
             name="name"
             placeholder="name"
@@ -55,6 +59,7 @@ const App = () => {
             focus
           </button>
         </div>
+        <pre>{JSON.stringify(rect, null, 2)}</pre>
       </div>
     </div>
   );

@@ -7,6 +7,6 @@ export const useMeasure = (data) => {
 
   useLayoutEffect(() => {
     setRect(myRef.current.getBoundingClientRect());
-  }, [data]);
+  }, data);
   return [rect, myRef];
 };
