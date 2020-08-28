@@ -8,6 +8,7 @@ const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
 
   const inputRef = useRef();
+  const hello = useRef(() => console.log("hello"));
 
   const [showHello, setHello] = useState(true);
 
@@ -44,6 +45,7 @@ const App = () => {
           <button
             onClick={() => {
               inputRef.current.focus();
+              hello.current();
             }}
           >
             focus
