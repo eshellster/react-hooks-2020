@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useFetch } from "./useFetch";
-import { UseMeasure } from "./useMeasure";
+import { useMeasure } from "./useMeasure";
 
 export const Hello = () => {
   //   const renders = useRef(0);
@@ -11,9 +11,7 @@ export const Hello = () => {
   }, [count]);
   //   console.log("hello render:", renders.current++);
 
-  const divRef = useRef();
-
-  const ref = UseMeasure(divRef, data);
+  const [rect, divRef] = useMeasure(data);
 
   return (
     <div>
@@ -21,7 +19,7 @@ export const Hello = () => {
         <div ref={divRef}>{data ? data : `loading...`}</div>
       </div>
 
-      <pre>{JSON.stringify(ref, null, 2)}</pre>
+      <pre>{JSON.stringify(rect, null, 2)}</pre>
       <div>count: {count}</div>
       <button
         onClick={() => {

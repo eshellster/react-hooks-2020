@@ -1,10 +1,12 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 
-export const UseMeasure = (divRef, data) => {
+export const useMeasure = (data) => {
   const [rect, setRect] = useState({});
 
+  const myRef = useRef();
+
   useLayoutEffect(() => {
-    setRect(divRef.current.getBoundingClientRect());
-  }, [data, divRef]);
-  return rect;
+    setRect(myRef.current.getBoundingClientRect());
+  }, [data]);
+  return [rect, myRef];
 };
