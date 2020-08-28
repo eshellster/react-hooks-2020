@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { useFetch } from "./useFetch";
+import { UseMeasure } from "./useMeasure";
 
 export const Hello = () => {
   //   const renders = useRef(0);
@@ -10,18 +11,17 @@ export const Hello = () => {
   }, [count]);
   //   console.log("hello render:", renders.current++);
 
-  const [rect, setRect] = useState({});
   const divRef = useRef();
-  useLayoutEffect(() => {
-    setRect(divRef.current.getBoundingClientRect());
-  }, [data]);
+
+  const ref = UseMeasure(divRef, data);
+
   return (
     <div>
       <div style={{ display: "flex" }}>
         <div ref={divRef}>{data ? data : `loading...`}</div>
       </div>
 
-      <pre>{JSON.stringify(rect, null, 2)}</pre>
+      <pre>{JSON.stringify(ref, null, 2)}</pre>
       <div>count: {count}</div>
       <button
         onClick={() => {
