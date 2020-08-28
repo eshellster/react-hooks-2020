@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import { useForm } from "./useForm";
 import { useFetch } from "./useFetch";
-// import { Hello } from "./Hello";
+import { Hello } from "./Hello";
 
 const App = () => {
   const [values, handleChange] = useForm({ name: "", email: "", password: "" });
   const [count, setCount] = useState(JSON.parse(localStorage.getItem("count")));
-  const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
+  const { data } = useFetch(`http://numbersapi.com/${count}/trivia`);
   const inputRef = useRef();
+
+  const [showHello, setHello] = useState(true);
 
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(count));
@@ -16,7 +18,7 @@ const App = () => {
 
   return (
     <div className="parent">
-      <div>
+      <div className="containerWrap">
         <div>{data ? data : `loading...`}</div>
         <button
           onClick={() => {
@@ -26,21 +28,21 @@ const App = () => {
           increment
         </button>
         <div>
-          {/* <button onClick={() => setHello(!showHello)}>toggle</button> */}
-          {/* {showHello && <Hello />} */}
-          <input
-            type="name"
-            name="name"
-            placeholder="name"
-            value={values.name}
-            onChange={handleChange}
-          />
+          <button onClick={() => setHello(!showHello)}>toggle</button>
+          {showHello && <Hello />}
           <input
             ref={inputRef}
             type="email"
             name="email"
             placeholder="email"
             value={values.email}
+            onChange={handleChange}
+          />
+          <input
+            type="name"
+            name="name"
+            placeholder="name"
+            value={values.name}
             onChange={handleChange}
           />
           <input

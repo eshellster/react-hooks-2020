@@ -42,3 +42,7 @@
   display: grid;
   place-items: center;
 }
+
+.containerWrap {
+  width: 500px;
+}
