@@ -6,11 +6,11 @@ import "./App.css";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <div className="parent">
-      <App />
-    </div>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <div className="parent">
+    <App />
+  </div>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 
