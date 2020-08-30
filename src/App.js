@@ -14,7 +14,7 @@ const App = () => {
       <Hello increment={increment} />
       <div>count:{count}</div>
       {favoriteNums.map((n) => {
-        return <Square key={n} onClick={() => increment(n)} n={n} />;
+        return <Square key={n} increment={increment} n={n} />;
       })}
     </div>
   );
