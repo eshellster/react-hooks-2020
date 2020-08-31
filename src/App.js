@@ -1,21 +1,40 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import "./App.css";
-import { Hello } from "./Hello";
-import { Square } from "./Square";
+import { useFetch } from "./useFetch";
+
+function computeLongeWord(arr) {
+  if (!arr) {
+    return [];
+  }
+
+  console.log("computing longest word");
+
+  let longestWord = "";
+
+  JSON.parse(arr).forEach((sentence) =>
+    sentence.split(" ").forEach((word) => {
+      if (word.length > longestWord.length) {
+        longestWord = word;
+      }
+    })
+  );
+
+  return longestWord;
+}
 
 const App = () => {
   const [count, setCount] = useState(0);
-  const favoriteNums = [7, 21, 37];
+  const { data } = useFetch(
+    "https://raw.githubusercontent.com/ajzbc/kanye.rest/quotes/quotes.json"
+  );
 
-  const increment = useCallback((n) => setCount((c) => c + n), [setCount]);
+  const longestWord = useMemo(() => computeLongeWord(data), [data]);
 
   return (
     <div>
-      <Hello increment={increment} />
       <div>count:{count}</div>
-      {favoriteNums.map((n) => {
-        return <Square key={n} increment={increment} n={n} />;
-      })}
+      <button onClick={() => setCount(count + 1)}>increment</button>
+      <div>{longestWord}</div>
     </div>
   );
 };

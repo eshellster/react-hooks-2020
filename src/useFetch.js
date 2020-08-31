@@ -20,7 +20,7 @@ export const useFetch = (url) => {
           setState({ data: y, loading: false });
         }
       });
-  }, [url]);
+  }, [url, state.data]);
 
   return state;
 };
