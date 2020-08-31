@@ -1,40 +1,35 @@
-import React, { useState, useMemo } from "react";
+import React, { useReducer, useState } from "react";
 import "./App.css";
-import { useFetch } from "./useFetch";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "add-todos":
+      return {
+        todos: [...state.todos, { text: action.text, completed: false }],
+      };
+    default:
+      return state;
+  }
+}
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const { data } = useFetch(
-    "https://raw.githubusercontent.com/ajzbc/kanye.rest/quotes/quotes.json"
-  );
-
-  function computeLongeWord(arr) {
-    if (!arr) {
-      return [];
-    }
-
-    console.log("computing longest word");
-
-    let longestWord = "";
-
-    JSON.parse(arr).forEach((sentence) =>
-      sentence.split(" ").forEach((word) => {
-        if (word.length > longestWord.length) {
-          longestWord = word;
-        }
-      })
-    );
-
-    return longestWord;
-  }
-
-  const longestWord = useMemo(() => computeLongeWord(data), [data]);
-
+  const [{ todos }, dispatch] = useReducer(reducer, { todos: [] });
+  const [text, setText] = useState();
   return (
     <div>
-      <div>count:{count}</div>
-      <button onClick={() => setCount(count + 1)}>increment</button>
-      <div>{longestWord}</div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (text === "") {
+            console.log("같음");
+          }
+          dispatch({ type: "add-todos", text });
+          setText("");
+        }}
+      >
+        <input value={text} onChange={(e) => setText(e.target.value)} />
+      </form>
+      <pre>{JSON.stringify(todos, null, 2)}</pre>
     </div>
   );
 };
