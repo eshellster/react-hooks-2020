@@ -6,12 +6,14 @@ function reducer(state, action) {
     case "add-todos":
       return {
         todos: [...state.todos, { text: action.text, completed: false }],
+        todoCount: state.todoCount + 1,
       };
     case "toggle-todo":
       return {
         todos: state.todos.map((t, idx) =>
           idx === action.idx ? { ...t, completed: !t.completed } : t
         ),
+        todoCount: state.todoCount - 1,
       };
     default:
       return state;
@@ -19,16 +21,17 @@ function reducer(state, action) {
 }
 
 const App = () => {
-  const [{ todos }, dispatch] = useReducer(reducer, { todos: [] });
+  const [{ todos, todoCount }, dispatch] = useReducer(reducer, {
+    todos: [],
+    todoCount: 0,
+  });
   const [text, setText] = useState();
   return (
     <div>
+      <h2>number of todos: {todoCount}</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (text === "") {
-            console.log("같음");
-          }
           dispatch({ type: "add-todos", text });
           setText("");
         }}
